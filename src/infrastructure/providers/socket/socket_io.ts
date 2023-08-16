@@ -1,19 +1,20 @@
-import { Socket, Server as SocketServer } from "$socket"
+import { Socket as SocketIO, Server as SocketServer } from "$socket"
+import { ISocket } from "@app/ports/providers/socket.ts"
 
-export default class Socket_IO {
-	private static instance: Socket_IO
+export default class Socket implements ISocket {
+	private static instance: Socket
 	private readonly host: string = Deno.env.get("HOST") || "localhost"
-	public readonly port: number = Deno.env.get("PORT_SOCKET") ? parseInt(Deno.env.get("PORT_SOCKET")!) : 3000
-	public readonly server = new SocketServer(this.port)
+	private readonly port: number = Deno.env.get("PORT_SOCKET") ? parseInt(Deno.env.get("PORT_SOCKET")!) : 3000
+	private readonly server = new SocketServer(this.port)
 	private isListening = false
-	private middlewares: {[key: string]: (data: any, socket: Socket, next: () => void) => void} = {}
+	private middlewares: {[key: string]: (data: any, socket: SocketIO, next: () => void) => void} = {}
 	private connections: {
-		[key: string]: (data: any, socket: Socket) => void
+		[key: string]: (data: any, socket: SocketIO) => void
 	} = {};
 	constructor() {
-		if (Socket_IO.instance)
-			return Socket_IO.instance
-		Socket_IO.instance = this
+		if (Socket.instance)
+			return Socket.instance
+		Socket.instance = this
 	}
 
 	public listen(callback?: (host: string, port: number) => void) {
@@ -33,7 +34,7 @@ export default class Socket_IO {
 		})
 	}
 
-	private handleConnection(socket: Socket) {
+	private handleConnection(socket: SocketIO) {
 		this.middlewares["connection"]?.(socket.data, socket, () => {
 			for (const key in this.connections) {
 					socket.on(key, (data) => {
@@ -45,18 +46,18 @@ export default class Socket_IO {
 		})
 	}
 
-	private handleMiddleware(key: string, data: any, socket: Socket, next: () => void) {
+	private handleMiddleware(key: string, data: any, socket: SocketIO, next: () => void) {
 		this.middlewares[key]? this.middlewares[key](data, socket, next) : next()
 	}
 
-	public use(key: string, callback: (data: any, socket: Socket, next: () => void) => void) {
+	public use(key: string, callback: (data: any, socket: SocketIO, next: () => void) => void) {
 		if(this.middlewares[key])
 			throw new Error("Key already exists")
 
 		this.middlewares[key] = callback
 	}
 
-	public add(key: string, callback: (data: any, socket: Socket) => void) {
+	public add(key: string, callback: (data: any, socket: SocketIO) => void) {
 		if(this.connections[key])
 			throw new Error("Key already exists")
 

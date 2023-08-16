@@ -1,5 +1,6 @@
 //@deno-types="npm:@types/express@4"
 import express from "$express"
+import { IRestFul } from "@app/ports/providers/restful.ts"
 
 export class Router {
 	public readonly router = express.Router()
@@ -28,10 +29,10 @@ export class Router {
 	}
 }
 
-export default class RestFul {
+export default class RestFul implements IRestFul {
 	private static instance: RestFul
 	private readonly host: string = Deno.env.get("HOST") || "localhost"
-	public readonly port: number = Deno.env.get("PORT_REST") ? parseInt(Deno.env.get("PORT_REST")!) : 3030
+	private readonly port: number = Deno.env.get("PORT_REST") ? parseInt(Deno.env.get("PORT_REST")!) : 3030
 	private isListening = false
 	private readonly app: express.Application = express()
 
