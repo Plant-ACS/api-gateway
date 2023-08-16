@@ -11,6 +11,7 @@
     "@app/": "./src/app/",
     "@core/": "./src/core/",
     "@infra/": "./src/infrastructure/",
+    "@infra/rep/": "./src/infrastructure/repositories/",
     "@main/": "./src/main/",
     "@pre/": "./src/presentation/"
   },
