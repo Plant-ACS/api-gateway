@@ -16,12 +16,12 @@ export default class Socket_IO {
 		Socket_IO.instance = this
 	}
 
-	public listen() {
+	public listen(callback?: (host: string, port: number) => void) {
 		if(this.isListening)
 			throw new Error("Socket already listening")
 
 		this.isListening = true
-		console.log(`Socket listening on port ${this.port}`)
+		callback!(this.host, this.port)
 		this.server.on("connection", (socket) => {
 			this.handleMiddleware("connection", socket.data, socket, () => {
 				this.connections["connection"]?.(socket.data, socket)
