@@ -1,4 +1,4 @@
-import Socket_IO from "@main/socket.ts"
+import Socket_IO from "@infra/socket.ts"
 import { Socket } from "$socket"
 
 const socket = new Socket_IO()
