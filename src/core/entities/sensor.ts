@@ -1,5 +1,5 @@
 export interface Sensor {
-    id: number | string, 
+    id: string,
     name: string,
     maxVoltage: number
 }
