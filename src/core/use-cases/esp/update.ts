@@ -1,4 +1,4 @@
-import { IESP } from "@core/entities/esp.ts"
+import { IESP } from "@entities"
 
 export type TUpdateEspDTO = {
 	readonly id: IESP["id"]
