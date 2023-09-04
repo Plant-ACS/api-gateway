@@ -1,7 +1,7 @@
-import { Esp } from "@core/entities/esp.ts"
+import { IESP } from "@entities"
 
 export interface IDeleteEspDTO {
-	readonly id: Esp["id"]
+	readonly id: IESP["id"]
 }
 
 export default interface IDeleteEsp {

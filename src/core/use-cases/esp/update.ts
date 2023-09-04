@@ -1,9 +1,9 @@
-import { Esp } from "@core/entities/esp.ts"
+import { IESP } from "@core/entities/esp.ts"
 
 export type TUpdateEspDTO = {
-	readonly id: Esp["id"]
-} & Partial<Omit<Esp, "id" | "userId">>
+	readonly id: IESP["id"]
+} & Partial<Omit<IESP, "id" | "userId">>
 
 export default interface IUpdateEsp {
-	update: (data: TUpdateEspDTO) => Promise<Esp>
+	update: (data: TUpdateEspDTO) => Promise<IESP>
 }

@@ -1,11 +1,11 @@
-import { Esp } from "@core/entities/esp.ts"
+import { IESP } from "@entities"
 
-export type TFindEspByIdDTO = Esp["id"]
+export type TFindEspByIdDTO = IESP["id"]
 export type TFilterEspDTO = {
 	order: "ASC" | "DESC"
 }
 
 export default interface IFindEsp {
-	findById: (data: TFindEspByIdDTO) => Promise<Esp>
-	findAll: () => Promise<Esp[]>
+	findById: (data: TFindEspByIdDTO) => Promise<IESP>
+	findAll: () => Promise<IESP[]>
 }
