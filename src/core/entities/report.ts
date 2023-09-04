@@ -1,6 +1,7 @@
+import { IESP } from '@entities'
 export interface IReport {
     id: string,
-    espId: string,
+    espId: IESP['id'],
     sensorId: string,
     generatedAt: Date
 }
