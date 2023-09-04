@@ -1,7 +1,7 @@
-import { Device } from "@core/entities/device.ts"
+import { IACS } from "@entities";
 
 export interface IDeleteDeviceDTO {
-    readonly id: Device["id"]
+    readonly id: IACS["id"]
 }
 
 export default interface IDeleteDevice {
