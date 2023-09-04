@@ -1,11 +1,9 @@
-import { Sensor } from "@core/entities/sensor.ts"
-export interface Esp {
+import { IModule } from "@core/entities/module.ts"
+export interface IESP {
     id: string,
     userId: string,
-		sensors: Sensor[],
-		ports: [{
-			device: string,
-			analog: number,
-			digital: number
-		}]
+	ports: Array<{
+		key: number | number[],
+		module: IModule['id']
+	}>
 }

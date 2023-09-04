@@ -1,6 +1,6 @@
-export interface Report {
-    id: string, 
-    title: string,
-    body: string,
+export interface IReport {
+    id: string,
+    espId: string,
+    sensorId: string,
     generatedAt: Date
 }
