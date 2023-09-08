@@ -4,7 +4,7 @@ export type TFindAcsByIdDTO = IACS["id"]
 export interface IFilterAcsDTO {
     order: "ASC" | "DESC"
 }
-export interface IFindACS {
+export default interface IFindACS {
     findById: (data: TFindAcsByIdDTO) => Promise<IACS>
     findAll: (data: IFilterAcsDTO) => Promise<IACS[]>
 }
