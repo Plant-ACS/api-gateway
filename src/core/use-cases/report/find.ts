@@ -6,7 +6,7 @@ export type TFilterReport = {
 	order: "ASC" | "DESC"
 }
 
-export default interface IFindReport {
+export interface IFindReport {
 	findById: (data: TFindReportDTO) => Promise<IReport>
 	findAll: () => Promise<IReport[]>
 }

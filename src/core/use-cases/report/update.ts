@@ -4,6 +4,6 @@ export type TUpdateReportDTO = {
 	readonly id: IReport["id"]
 } & Partial<Omit<IReport, "id">>
 
-export default interface IUpdateReport {
+export interface IUpdateReport {
 	update: (data: TUpdateReportDTO) => Promise<IReport>
 }

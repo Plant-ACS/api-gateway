@@ -4,6 +4,6 @@ export interface IDeleteACSDTO {
     readonly id: IACS["id"]
 }
 
-export default interface IDeleteACS {
+export interface IDeleteACS {
     delete: (data: IDeleteACSDTO) => Promise<void>
 }

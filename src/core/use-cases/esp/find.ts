@@ -5,7 +5,7 @@ export type TFilterESPDTO = {
 	order: "ASC" | "DESC"
 }
 
-export default interface IFindESP {
+export interface IFindESP {
 	findById: (data: TFindESPByIdDTO) => Promise<IESP>
 	findAll: () => Promise<IESP[]>
 }

@@ -4,6 +4,6 @@ export interface IDeleteModuleDTO {
 readonly id: IModule["id"]
 }
 
-export default interface IDeleteModule {
+export interface IDeleteModule {
 	delete: (data: IDeleteModuleDTO) => Promise<void>
 }

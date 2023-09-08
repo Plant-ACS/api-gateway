@@ -4,6 +4,6 @@ export interface IDeleteUserDTO {
     readonly id: IUser["id"]
 }
 
-export default interface IDeleteUser {
+export interface IDeleteUser {
     delete: (data: IDeleteUserDTO) => Promise<void>
 }

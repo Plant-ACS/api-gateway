@@ -5,7 +5,7 @@ export type TFilterModules = {
 	order: "ASC" | "DESC"
 }
 
-export default interface IFindModules {
+export interface IFindModules {
 	findById: (data: TFindModuleByIdDTO) => Promise<IModule>
 	findAll: () => Promise<IModule[]>
 }

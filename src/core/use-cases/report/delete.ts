@@ -4,6 +4,6 @@ export interface IDeleteReportDTO {
 	readonly id: IReport["id"]
 }
 
-export default interface IDeleteReport {
+export interface IDeleteReport {
 	delete: (data: IDeleteReportDTO) => Promise<void>
 }

@@ -4,6 +4,6 @@ export interface IDeleteESPDTO {
 	readonly id: IESP["id"]
 }
 
-export default interface IDeleteESP {
+export interface IDeleteESP {
 	delete: (data: IDeleteESPDTO) => Promise<void>
 }
