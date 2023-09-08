@@ -1,7 +1,7 @@
 import { IESP } from "@entities"
 
-export type TCreateEspDTO = Omit<IESP, "id">
+export type TCreateESPDTO = Omit<IESP, "id">
 
-export default interface ICreateEsp {
-	create: (data: TCreateEspDTO) => Promise<IESP>
+export default interface ICreateESP {
+	create: (data: TCreateESPDTO) => Promise<IESP>
 }
