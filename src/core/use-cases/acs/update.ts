@@ -1,9 +1,9 @@
-import { IModule } from "@entities"
+import { IACS } from "@entities"
 
-export type TUpdateModuleDTO = {
-    readonly id: IModule["id"]
-	} & Partial<Omit<IModule, "id" | "createdAt">>
+export type TUpdateACSDTO = {
+  readonly id: IACS["id"]
+} & Partial<Omit<IACS, "id" | "createdAt">>
 
-export default interface IUpdateModule {
-    update: (data: TUpdateModuleDTO) => Promise<IModule>
+export default interface IUpdateACS {
+  update: (data: TUpdateACSDTO) => Promise<IACS>
 }
