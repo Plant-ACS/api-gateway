@@ -1,7 +1,7 @@
-import { User } from "@core/entities/user.ts"
+import { IUser } from "@core/entities/user.ts"
 
 export interface IDeleteUserDTO {
-    readonly id: User["id"]
+    readonly id: IUser["id"]
 }
 
 export default interface IDeleteUser {

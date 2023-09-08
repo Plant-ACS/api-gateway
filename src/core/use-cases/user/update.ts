@@ -1,8 +1,8 @@
-import { User } from "@core/entities/user.ts"
+import { IUser } from "@core/entities/user.ts"
 
 export type TUpdateUserDTO = {
-    readonly id: User["id"]
-	} & Partial<Omit<User, "id" | "registeredAt">>
+    readonly id: IUser["id"]
+	} & Partial<Omit<IUser, "id" | "registeredAt">>
 export default interface IUpdateUser {
-    update: (data: TUpdateUserDTO) => Promise<User>
+    update: (data: TUpdateUserDTO) => Promise<IUser>
 }

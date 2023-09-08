@@ -1,8 +1,8 @@
-import { User } from "@core/entities/user.ts"
+import { IUser } from "@core/entities/user.ts"
 
 export type TAlterUserNameDTO = {
-	old: User["username"],
-	new: User["username"]
+	old: IUser["username"],
+	new: IUser["username"]
 }
 
 export default interface IAterUsername {

@@ -1,7 +1,7 @@
-import { User } from "@core/entities/user.ts"
+import { IUser } from "@core/entities/user.ts"
 
-export type TCreateUserDTO = Omit<User, "id">
+export type TCreateUserDTO = Omit<IUser, "id">
 
 export default interface ICreateUser {
-    create: (data: TCreateUserDTO) => Promise<User>
+    create: (data: TCreateUserDTO) => Promise<IUser>
 }
