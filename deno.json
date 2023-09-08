@@ -11,6 +11,7 @@
     "@app/": "./src/app/",
     "@core/": "./src/core/",
     "@entities": "./src/core/entities/mod.ts",
+    "@use-cases": "./src/core/use-cases/mod.ts",
     "@infra/": "./src/infrastructure/",
     "@infra/rep/": "./src/infrastructure/repositories/",
     "@main/": "./src/main/",
