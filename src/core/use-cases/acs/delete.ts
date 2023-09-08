@@ -1,9 +1,9 @@
 import { IACS } from "@entities";
 
-export interface IDeleteDeviceDTO {
+export interface IDeleteACSDTO {
     readonly id: IACS["id"]
 }
 
-export default interface IDeleteDevice {
-    delete: (data: IDeleteDeviceDTO) => Promise<void>
+export default interface IDeleteACS {
+    delete: (data: IDeleteACSDTO) => Promise<void>
 }

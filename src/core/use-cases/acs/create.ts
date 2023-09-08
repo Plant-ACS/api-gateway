@@ -1,7 +1,7 @@
 import { IACS } from "@entities";
 
-export type TCreateDeviceDTO = Omit<IACS, "id">
+export type TCreateACSDTO = Omit<IACS, "id">
 
-export default interface ICreateDevice {
-    create: (data: TCreateDeviceDTO) => Promise<IACS>
+export default interface ICreateACS {
+    create: (data: TCreateACSDTO) => Promise<IACS>
 }

@@ -1,10 +1,10 @@
 import { IACS } from "@entities"
 
-export type TFindAcsByIdDTO = IACS["id"]
-export interface IFilterAcsDTO {
+export type TFindACSByIdDTO = IACS["id"]
+export interface IFilterACSDTO {
     order: "ASC" | "DESC"
 }
 export default interface IFindACS {
-    findById: (data: TFindAcsByIdDTO) => Promise<IACS>
-    findAll: (data: IFilterAcsDTO) => Promise<IACS[]>
+    findById: (data: TFindACSByIdDTO) => Promise<IACS>
+    findAll: (data: IFilterACSDTO) => Promise<IACS[]>
 }
