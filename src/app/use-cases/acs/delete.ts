@@ -4,11 +4,11 @@ import { IFindACSRepository } from "@app/ports/repositories/acs/find.ts"
 export class DeleteACS implements IDeleteACS {
 	constructor(
 		readonly deleteACSRepository: IDeleteACSRepository,
-		readonly findSearchACS: IFindACSRepository
+		readonly findACSRepository: IFindACSRepository
 	) {}
 
 	async delete(data: IDeleteACSDTO): Promise<void> {
-		if (!(await this.findSearchACS.findById(data.id)))
+		if (!(await this.findACSRepository.findById(data.id)))
 			throw new Error("The ACS id passed does not exist")
 
 		await this.deleteACSRepository.delete(data.id)
