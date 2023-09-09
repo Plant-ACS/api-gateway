@@ -15,7 +15,7 @@ export interface IFindModuleSearchDTO {
 	}
 }
 
-export interface IFindModules {
+export interface IFindModule {
 	findById: (data: TFindModuleByIdDTO) => Promise<IModule>
 	findAll: () => Promise<IModule[]>
 }
