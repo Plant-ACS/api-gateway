@@ -1,12 +1,19 @@
 import { IReport } from "@entities"
 
-export type TFindReportDTO = IReport["id"]
+export type TFindReportByIdDTO = IReport["id"]
 
-export type TFilterReport = {
-	order: "ASC" | "DESC"
+export interface IFindReportSearchDTO {
+	espId?: IReport["espId"],
+	moduleId?: IReport["moduleId"],
+	generatedAt?: IReport["generatedAt"],
+	readonly filter: {
+		order: "ASC" | "DESC",
+		limit: number,
+		page: number
+	}
 }
 
 export interface IFindReport {
-	findById: (data: TFindReportDTO) => Promise<IReport>
+	findById: (data: TFindReportByIdDTO) => Promise<IReport>
 	findAll: () => Promise<IReport[]>
 }
