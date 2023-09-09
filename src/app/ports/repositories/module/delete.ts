@@ -1,5 +1,5 @@
-import { IDeleteModuleDTO } from "@use-cases"
+import { TDeleteModuleDTO } from "@use-cases"
 
 export interface IDeleteModuleRepository {
-	delete: (data: IDeleteModuleDTO) => Promise<void>
+	delete: (data: TDeleteModuleDTO) => Promise<void>
 }

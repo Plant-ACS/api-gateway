@@ -1,9 +1,7 @@
 import { IModule } from "@entities"
 
-export interface IDeleteModuleDTO {
-readonly id: IModule["id"]
-}
+export type TDeleteModuleDTO = IModule["id"]
 
 export interface IDeleteModule {
-	delete: (data: IDeleteModuleDTO) => Promise<void>
+	delete: (data: TDeleteModuleDTO) => Promise<void>
 }
