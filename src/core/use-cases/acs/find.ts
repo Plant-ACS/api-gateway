@@ -3,9 +3,9 @@ import { IACS } from "@entities"
 export type TFindACSByIdDTO = IACS["id"]
 
 export interface IFindSearchACSDTO {
-	name: IACS["name"],
-	espId: IACS["espId"],
-	createdAt: IACS["createdAt"],
+	name?: IACS["name"],
+	espId?: IACS["espId"],
+	createdAt?: IACS["createdAt"],
 	readonly filter : {
 		readonly order: "ASC" | "DESC",
 		readonly limit: number,
