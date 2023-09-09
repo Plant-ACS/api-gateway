@@ -10,16 +10,11 @@ export default class CreateACS implements ICreateACS {
 	) {}
 
 	async create(data: TCreateACSDTO): Promise<IACS> {
-		if ((await this.acsAlreadyExists.alreadyExists({
+		if (await this.acsAlreadyExists.alreadyExists({
 				name: data.name,
 				espId: data.espId,
 				createdAt: data.createdAt,
-				filter: {
-					order: "ASC",
-					limit: 1,
-					page: 1
-				}
-			})) === true
+			}) === true
 		)
 		throw new ConflictError("ACS already exists")
 

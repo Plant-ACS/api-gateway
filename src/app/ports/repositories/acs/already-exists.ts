@@ -1,13 +1,4 @@
-import { IACS } from "@entities"
-
-export type TACSAlreadyExists = {
-	readonly filter: {
-		order: "ASC" | "DESC",
-		limit: number,
-		page: number
-	}
-} & Omit<IACS, "id">
-
+import { TCreateACSDTO } from "@use-cases"
 export interface IACSAlreadyExists {
-	alreadyExists: (data: TACSAlreadyExists) => Promise<boolean>
+	alreadyExists: (data: TCreateACSDTO) => Promise<boolean>
 }
