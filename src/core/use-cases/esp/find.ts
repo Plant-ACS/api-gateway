@@ -3,8 +3,8 @@ import { IESP } from "@entities"
 export type TFindESPByIdDTO = IESP["id"]
 
 export interface IFindESPSearchDTO {
-	userId: IESP["userId"],
-	ports: IESP["ports"],
+	userId?: IESP["userId"],
+	ports?: IESP["ports"],
 	readonly filter: {
 		order: "ASC" | "DESC",
 		limit: number,
