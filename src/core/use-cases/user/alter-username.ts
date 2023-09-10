@@ -5,6 +5,6 @@ export type TAlterUserNameDTO = {
 	new: IUser["username"]
 }
 
-export interface IAterUsername {
+export interface IAterUserName {
 	alterUsername: (data: TAlterUserNameDTO) => Promise<void>
 }
