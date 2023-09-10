@@ -1,12 +1,19 @@
 import { IUser } from "@core/entities/user.ts"
 
-export interface IFindUserById {
-	readonly id: IUser["id"]
+export type TFindUserByIdDTO = IUser["id"]
+
+export interface IFindUserSearchDTO {
+	username?: string,
+	email?: string,
+	readonly filter: {
+		order: "ASC" | "DESC",
+		limit: number,
+		page: number
+	}
 }
-export type IFilterUsersDTO = {
-	order: "ASC" | "DESC"
-}
+
 export interface IFindUser {
-	findById: (data: IFindUserById) => Promise<IUser>
+	findById: (data: TFindUserByIdDTO) => Promise<IUser>
+	findSearch: (data: IFindUserSearchDTO) => Promise<IUser[]>
 	findAll: () => Promise<IUser[]>
 }

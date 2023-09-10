@@ -1,7 +1,7 @@
 import { IReport } from "@entities"
 
-export type IDeleteReportDTO = IReport["id"]
+export type TDeleteReportDTO = IReport["id"]
 
 export interface IDeleteReport {
-	delete: (data: IDeleteReportDTO) => Promise<void>
+	delete: (data: TDeleteReportDTO) => Promise<void>
 }

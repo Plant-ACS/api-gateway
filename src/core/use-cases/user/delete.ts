@@ -1,9 +1,7 @@
 import { IUser } from "@core/entities/user.ts"
 
-export interface IDeleteUserDTO {
-    readonly id: IUser["id"]
-}
+export type TDeleteUserDTO = IUser["id"]
 
 export interface IDeleteUser {
-    delete: (data: IDeleteUserDTO) => Promise<void>
+    delete: (data: TDeleteUserDTO) => Promise<void>
 }
