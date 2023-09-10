@@ -1,4 +1,4 @@
-import { IDeleteReport, IDeleteReportDTO } from "@use-cases"
+import { IDeleteReport, TDeleteReportDTO } from "@use-cases"
 import { IFindReportRepository, IDeleteReportRepository } from "@app/ports/repositories/report/mod.ts"
 
 export class DeleteReport implements IDeleteReport {
@@ -7,8 +7,8 @@ export class DeleteReport implements IDeleteReport {
 		readonly deleteReportRepository: IDeleteReportRepository
 	) {}
 
-	async delete(data: IDeleteReportDTO): Promise<void> {
-		if (await this.findReportRepository.findById(data))
+	async delete(data: TDeleteReportDTO): Promise<void> {
+		if (!(await this.findReportRepository.findById(data)))
 			throw new Error("The Report id passed does not exist")
 
 			return await this.deleteReportRepository.delete(data)
