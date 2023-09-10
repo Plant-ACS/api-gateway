@@ -15,5 +15,6 @@ export interface IFindReportSearchDTO {
 
 export interface IFindReport {
 	findById: (data: TFindReportByIdDTO) => Promise<IReport>
+	findSearch: (data: IFindReportSearchDTO) => Promise<IReport[]>
 	findAll: () => Promise<IReport[]>
 }
