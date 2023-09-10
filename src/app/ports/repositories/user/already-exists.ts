@@ -1,5 +1,7 @@
-import { TCreateUserDTO } from "@use-cases"
+import { IUser } from "@entities"
+
+export type TUserAlreadyExists = Omit<IUser, "id" | "password" | "registeredAt">
 
 export interface IUserAlreadyExistsRepository {
-	alreadyExists: (data: TCreateUserDTO) => Promise<boolean>
+	alreadyExists: (data: TUserAlreadyExists) => Promise<boolean>
 }
