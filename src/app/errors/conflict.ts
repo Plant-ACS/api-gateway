@@ -1,4 +1,4 @@
-import { DefaultError } from "./default-error.ts";
+import { DefaultError } from "./default.ts";
 
 export class ConflictError extends DefaultError {
 	constructor(message: string){
