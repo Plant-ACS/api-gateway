@@ -1,10 +1,11 @@
-import Socket_IO from "@infra/socket.ts"
-import { Socket } from "$socket"
+import sockets from "@infra/providers/socket/mod.ts"
 
-const socket = new Socket_IO()
+const socket = new sockets.socket_IO.Socket()
 
-socket.add("connection", (socket: Socket) => {
-		socket.on("message", (message: string) => {
-				console.log(message)
-		})
+socket.add("message", (message: string) => {
+	console.log(message)
+})
+
+socket.listen((host, port) => {
+	console.log(`Socket listening on ${host}:${port}`)
 })
