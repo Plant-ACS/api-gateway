@@ -1,7 +1,7 @@
 import { IReport } from "@entities"
 import { ICreateReport, TCreateReportDTO } from "@use-cases";
 import { IReportAlreadyExistsRepository, ISaveReportRepository } from "@app/ports/repositories/report/mod.ts"
-
+import { ConflictError } from "@app/errors/mod.ts";
 export class CreateReport implements ICreateReport {
 	constructor(
 		readonly reportAlreadyExistsRepository: IReportAlreadyExistsRepository,
@@ -16,7 +16,7 @@ export class CreateReport implements ICreateReport {
 				generatedAt: data.generatedAt
 			}) === true
 		)
-			throw new Error("Report already exists")
+			throw new ConflictError("Report already exists")
 
 		return await this.saveReportRepository.save(data)
 	}

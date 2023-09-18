@@ -1,7 +1,7 @@
 import { IACS } from "@entities"
 import { ICreateACS, TCreateACSDTO } from "@use-cases"
 import { IACSAlreadyExists, ISaveACSRepository } from "@app/ports/repositories/acs/mod.ts"
-import { ConflictError } from "@app/errors/conflict-error.ts"
+import { ConflictError } from "@app/errors/mod.ts"
 
 export default class CreateACS implements ICreateACS {
 	constructor(

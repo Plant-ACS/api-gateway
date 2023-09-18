@@ -1,7 +1,7 @@
 import { IESP } from "@entities"
 import { ICreateESP, TCreateESPDTO } from "@use-cases";
 import { IESPAlreadyExistsRepository, ISaveESPRepository } from "@app/ports/repositories/esp/mod.ts"
-import { ConflictError } from "@app/errors/conflict-error.ts";
+import { ConflictError } from "@app/errors/mod.ts";
 
 export class CreateESP implements ICreateESP {
 	constructor(

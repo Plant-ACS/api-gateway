@@ -1,7 +1,7 @@
 import { IModule } from "@entities"
 import { ICreateModule, TCreateModuleDTO } from "@use-cases"
 import { IModuleAlreadyExistsRepository, ISaveModuleRepository } from "@app/ports/repositories/module/mod.ts"
-
+import { ConflictError } from "@app/errors/mod.ts"
 export class CreateModule implements ICreateModule {
 	constructor (
 		readonly moduleAlreadyExists: IModuleAlreadyExistsRepository,
@@ -17,7 +17,7 @@ export class CreateModule implements ICreateModule {
 				pinAmount: data.pinAmount
 			}) === true
 		)
-		throw new Error("Module already exists")
+		throw new ConflictError("Module already exists")
 
 		return await this.saveModuleRepository.save(data)
 	}
