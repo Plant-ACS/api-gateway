@@ -1,5 +1,4 @@
-import { TCreateReportDTO } from "@use-cases"
-
+import { IReport } from "@entities"
 export interface IReportAlreadyExistsRepository {
-	alreadyExists: (data: TCreateReportDTO) => Promise<boolean>
+	alreadyExists: (data: Omit<IReport, "id">) => Promise<boolean>
 }

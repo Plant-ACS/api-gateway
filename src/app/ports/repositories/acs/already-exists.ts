@@ -1,4 +1,4 @@
-import { TCreateACSDTO } from "@use-cases"
+import { IACS } from "@entities"
 export interface IACSAlreadyExists {
-	alreadyExists: (data: TCreateACSDTO) => Promise<boolean>
+	alreadyExists: (data: Omit<IACS, "id">) => Promise<boolean>
 }

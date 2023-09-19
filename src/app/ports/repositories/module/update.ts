@@ -1,5 +1,8 @@
 import { IModule } from "@entities"
-import { TUpdateModuleDTO } from "@use-cases"
+
+export type TUpdateModuleDTO = {
+	readonly id: IModule["id"]
+} & Partial<Omit<IModule, "id">>
 
 export interface IUpdateModuleRepository {
 	update: (data: TUpdateModuleDTO) => Promise<IModule>

@@ -1,5 +1,5 @@
-import { IDeleteReportDTO } from "@use-cases"
+import { IReport } from "@entities"
 
 export interface IDeleteReportRepository {
-	delete: (data: IDeleteReportDTO) => Promise<void>
+	delete: (data: IReport["id"]) => Promise<void>
 }
