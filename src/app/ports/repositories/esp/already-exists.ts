@@ -1,5 +1,4 @@
-import { TCreateESPDTO } from "@use-cases"
-
+import { IESP } from "@entities"
 export interface IESPAlreadyExistsRepository {
-	alreadyExists: (data: TCreateESPDTO) => Promise<boolean>
+	alreadyExists: (data: Omit<IESP, "id">) => Promise<boolean>
 }

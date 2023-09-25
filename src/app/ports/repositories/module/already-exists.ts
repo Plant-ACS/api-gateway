@@ -1,5 +1,4 @@
-import { TCreateModuleDTO } from "@use-cases"
-
+import { IModule } from "@entities"
 export interface IModuleAlreadyExistsRepository {
-	alreadyExists: (data: TCreateModuleDTO) => Promise<boolean>
+	alreadyExists: (data: Omit<IModule, "id">) => Promise<boolean>
 }

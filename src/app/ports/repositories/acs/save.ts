@@ -1,6 +1,4 @@
 import { IACS } from "@entities"
-import { TCreateACSDTO } from "@use-cases"
-
 export interface ISaveACSRepository {
-	save: (data: TCreateACSDTO) => Promise<IACS>
+	save: (data: Omit<IACS, "id">) => Promise<IACS>
 }

@@ -1,8 +1,15 @@
 import { IReport } from "@entities"
-import { TFindReportByIdDTO, IFindReportSearchDTO } from "@use-cases"
+export type TFindReportSearchDTO = {
+
+	readonly filter: {
+		order: "ASC" | "DESC",
+		limit: number,
+		page: number
+	}
+} & Partial<Omit<IReport, "id">>
 
 export interface IFindReportRepository {
-	findById: (data: TFindReportByIdDTO) => Promise<IReport>
-	findSearch: (data: IFindReportSearchDTO) => Promise<IReport[]>
+	findById: (data: IReport["id"]) => Promise<IReport>
+	findSearch: (data: TFindReportSearchDTO) => Promise<IReport[]>
 	findAll: () => Promise<IReport[]>
 }

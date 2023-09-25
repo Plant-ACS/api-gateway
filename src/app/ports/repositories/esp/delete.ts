@@ -1,5 +1,4 @@
-import { TDeleteESPDTO } from "@use-cases"
-
+import { IESP } from "@entities"
 export interface IDeleteESPRepository {
-	delete: (data: TDeleteESPDTO) => Promise<void>
+	delete: (data: IESP["id"]) => Promise<void>
 }

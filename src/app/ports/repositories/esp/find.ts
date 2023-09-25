@@ -1,8 +1,14 @@
 import { IESP } from "@entities"
-import { TFindESPByIdDTO, IFindESPSearchDTO } from "@use-cases"
+export type TFindESPSearchDTO = {
+	readonly filter: {
+		order: "ASC" | "DESC",
+		limit: number,
+		page: number
+	}
+} & Partial<Omit<IESP, "id">>
 
 export interface IFindESPRepository {
-	findById: (data: TFindESPByIdDTO) => Promise<IESP>
-	findSearch: (data: IFindESPSearchDTO) => Promise<IESP[]>
+	findById: (data: IESP["id"]) => Promise<IESP>
+	findSearch: (data: TFindESPSearchDTO) => Promise<IESP[]>
 	findAll: () => Promise<IESP[]>
 }
