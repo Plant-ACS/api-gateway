@@ -1,6 +1,8 @@
 import { IUser } from "@entities"
-import { TUpdateUserDTO } from "@use-cases"
-
+export type TUpdateUserDTO = {
+	readonly id: IUser["id"],
+	readonly username?: IUser["username"]
+}
 export interface IUpdateUserRepository {
 	update: (data: TUpdateUserDTO) => Promise<IUser>
 }
