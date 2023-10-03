@@ -8,7 +8,7 @@ export interface IFindModuleSearchDTO {
 	isDigital?: IModule["isDigital"],
 	maxVoltage?: IModule["maxVoltage"],
 	pinAmount?: IModule["pinAmount"]
-	readonly filter: {
+	readonly filter?: {
 		order: "ASC" | "DESC",
 		limit: number,
 		page: number

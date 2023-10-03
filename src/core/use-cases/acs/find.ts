@@ -6,7 +6,7 @@ export interface IFindSearchACSDTO {
 	name?: IACS["name"],
 	espId?: IACS["espId"],
 	createdAt?: IACS["createdAt"],
-	readonly filter : {
+	readonly filter?: {
 		readonly order: "ASC" | "DESC",
 		readonly limit: number,
 		readonly page: number

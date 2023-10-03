@@ -5,7 +5,7 @@ export type TFindESPByIdDTO = IESP["id"]
 export interface IFindESPSearchDTO {
 	userId?: IESP["userId"],
 	ports?: IESP["ports"],
-	readonly filter: {
+	readonly filter?: {
 		order: "ASC" | "DESC",
 		limit: number,
 		page: number

@@ -5,6 +5,11 @@ export type TFindUserByIdDTO = IUser["id"]
 export interface IFindUserSearchDTO {
 	username?: string,
 	email?: string
+	readonly filter?: {
+		order: "ASC" | "DESC",
+		limit: number,
+		page: number
+	}
 }
 
 export interface IFindUser {

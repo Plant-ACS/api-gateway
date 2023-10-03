@@ -6,7 +6,7 @@ export interface IFindReportSearchDTO {
 	espId?: IReport["espId"],
 	moduleId?: IReport["moduleId"],
 	generatedAt?: IReport["generatedAt"],
-	readonly filter: {
+	readonly filter?: {
 		order: "ASC" | "DESC",
 		limit: number,
 		page: number
