@@ -1,5 +1,5 @@
-import { TDeleteUserDTO } from "@use-cases"
+import { IUser } from "@entities";
 
 export interface IDeleteUserRepository {
-	delete: (data: TDeleteUserDTO) => Promise<void>
+	delete: (data: IUser["id"]) => Promise<void>
 }

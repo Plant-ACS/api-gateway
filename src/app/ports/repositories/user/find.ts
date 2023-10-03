@@ -1,8 +1,15 @@
 import { IUser } from "@entities"
-import { TFindUserByIdDTO, IFindUserSearchDTO } from "@use-cases"
+
+export type IFindUserSearchDTO = {
+	readonly filter: {
+		order: "ASC" | "DESC",
+		limit: number,
+		page: number
+	}
+} & Partial<Omit<IUser, "id" | "password" | "registeredAt">>
 
 export interface IFindUserRepository {
-	findById: (data: TFindUserByIdDTO) => Promise<IUser>
+	findById: (data: IUser["id"]) => Promise<IUser>
 	findSearch: (data: IFindUserSearchDTO) => Promise<IUser[]>
 	findAll: () => Promise<IUser[]>
 }
