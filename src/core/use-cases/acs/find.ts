@@ -1,6 +1,8 @@
 import { IACS } from "@entities"
 
-export type TFindACSByIdDTO = IACS["id"]
+export type TFindACSByIdDTO = {
+	readonly id: IACS["id"]
+}
 
 export interface IFindSearchACSDTO {
 	name?: IACS["name"],

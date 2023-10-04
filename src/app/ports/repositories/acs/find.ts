@@ -1,7 +1,7 @@
 import { IACS } from "@entities"
 
 export type TFindSearchACSDTO = {
-	readonly filter : {
+	readonly filter: {
 		readonly order: "ASC" | "DESC",
 		readonly limit: number,
 		readonly page: number
