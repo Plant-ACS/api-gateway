@@ -1,4 +1,4 @@
-import { IDeleteACS, IDeleteACSDTO } from "@use-cases"
+import { IDeleteACS, TDeleteACSDTO } from "@use-cases"
 import { IDeleteACSRepository } from "@app/ports/repositories/acs/mod.ts"
 import { IFindACSRepository } from "@app/ports/repositories/acs/find.ts"
 export class DeleteACS implements IDeleteACS {
@@ -7,7 +7,7 @@ export class DeleteACS implements IDeleteACS {
 		readonly findACSRepository: IFindACSRepository
 	) {}
 
-	async delete(data: IDeleteACSDTO): Promise<void> {
+	async delete(data: TDeleteACSDTO): Promise<void> {
 		if (!(await this.findACSRepository.findById(data.id)))
 			throw new Error("The ACS id passed does not exist")
 

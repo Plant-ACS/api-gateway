@@ -8,9 +8,9 @@ export class DeleteESP implements IDeleteESP {
 	) {}
 
 	async delete(data: TDeleteESPDTO): Promise<void> {
-		if (!(await this.findESPRepository.findById(data)))
+		if (!(await this.findESPRepository.findById(data.id)))
 			throw new Error("The ESP id passed does not exist")
 
-			this.deleteESPRepository.delete(data)
+			this.deleteESPRepository.delete(data.id)
 	}
 }

@@ -1,9 +1,9 @@
 import { IACS } from "@entities";
 
-export interface IDeleteACSDTO {
+export type TDeleteACSDTO = {
     readonly id: IACS["id"]
 }
 
 export interface IDeleteACS {
-    delete: (data: IDeleteACSDTO) => Promise<void>
+    delete: (data: TDeleteACSDTO) => Promise<void>
 }

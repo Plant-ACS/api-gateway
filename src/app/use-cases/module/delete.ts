@@ -7,9 +7,9 @@ export class DeleteModule implements IDeleteModule {
 	) {}
 
 	async delete(data: TDeleteModuleDTO): Promise<void> {
-		if (!(await this.findModuleRepository.findById(data)))
+		if (!(await this.findModuleRepository.findById(data.id)))
 			throw new Error("The Module id passed does not exist")
 
-		return await this.deleteModuleRepository.delete(data)
+		return await this.deleteModuleRepository.delete(data.id)
 	}
 }
