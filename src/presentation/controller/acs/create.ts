@@ -1,4 +1,5 @@
 import { ICreateACS } from "@use-cases";
+import { InternalServerError } from "@app/errors/mod.ts"
 import { IController, IRequest, IResponse, IValidator } from "@app/ports/presentation/mod.ts";
 
 export class CreateACSController implements IController {
@@ -18,11 +19,8 @@ export class CreateACSController implements IController {
 				body: await this.createACSController.create(request.body)
 			});
 		}
-		catch(_error) {
-			return ({
-				statusCode: 400,
-				body: "ACS could not be created" // error.message
-			})
+		catch(error) {
+			return new InternalServerError(error)
 		}
 	}
 }

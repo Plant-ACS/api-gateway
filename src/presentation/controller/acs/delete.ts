@@ -1,4 +1,5 @@
 import { IDeleteACS } from "@use-cases"
+import { InternalServerError } from "@app/errors/mod.ts";
 import { IController, IRequest, IResponse, IValidator } from "@app/ports/presentation/mod.ts";
 
 export class DeleteACSController implements IController {
@@ -11,7 +12,8 @@ export class DeleteACSController implements IController {
 		try {
 			const error = this.validationParameters.validate(request.params)
 
-			if (error) throw error
+			if (error)
+				return error
 
 			await this.deleteACS.delete(request.params.id)
 
@@ -20,11 +22,8 @@ export class DeleteACSController implements IController {
 				body: "ACS deleted successfully"
 			})
 		}
-		catch(_error) {
-			return ({
-				statusCode: 400,
-				body: "ACS could not be deleted"
-			})
+		catch(error) {
+			return new InternalServerError(error)
 		}
 	}
 }
