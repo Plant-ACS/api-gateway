@@ -1,6 +1,8 @@
 import { IESP } from "@entities"
 
-export type TFindESPByIdDTO = IESP["id"]
+export type TFindESPByIdDTO = {
+	readonly id: IESP["id"]
+}
 
 export interface IFindESPSearchDTO {
 	userId?: IESP["userId"],

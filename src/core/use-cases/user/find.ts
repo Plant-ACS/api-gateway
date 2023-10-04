@@ -1,7 +1,8 @@
 import { IUser } from "@core/entities/user.ts"
 
-export type TFindUserByIdDTO = IUser["id"]
-
+export type TFindUserByIdDTO = {
+	readonly id: IUser["id"]
+}
 export interface IFindUserSearchDTO {
 	username?: string,
 	email?: string

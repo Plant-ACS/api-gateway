@@ -1,6 +1,8 @@
 import { IModule } from "@entities"
 
-export type TFindModuleByIdDTO = IModule["id"]
+export type TFindModuleByIdDTO = {
+	readonly id: IModule["id"]
+}
 
 export interface IFindModuleSearchDTO {
 	name?: IModule["name"],

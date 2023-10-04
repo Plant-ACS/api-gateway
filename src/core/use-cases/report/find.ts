@@ -1,6 +1,8 @@
 import { IReport } from "@entities"
 
-export type TFindReportByIdDTO = IReport["id"]
+export type TFindReportByIdDTO = {
+	readonly id: IReport["id"]
+}
 
 export interface IFindReportSearchDTO {
 	espId?: IReport["espId"],
