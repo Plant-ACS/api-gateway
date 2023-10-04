@@ -18,7 +18,7 @@ export class DeleteACSController implements IController {
 			await this.deleteACS.delete(request.params.id)
 
 			return ({
-				statusCode: 200,
+				statusCode: 204,
 				body: "ACS deleted successfully"
 			})
 		}
