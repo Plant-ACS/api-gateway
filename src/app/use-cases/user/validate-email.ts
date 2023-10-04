@@ -9,7 +9,7 @@ export class ValidateEmail implements IValidateEmail {
 	) {}
 
 	async validateEmail(data: TValidateEmailDTO): Promise<void> {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		const emailRegex = /^[a-zA-Z0-9-.+]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 		if (!emailRegex.test(data.email)) {
 			throw new Error("Invalid email address");
 		}
