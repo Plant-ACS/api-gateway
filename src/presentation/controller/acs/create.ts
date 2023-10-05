@@ -20,7 +20,7 @@ export class CreateACSController implements IController {
 			});
 		}
 		catch(error) {
-			return new InternalServerError(error)
+			return new InternalServerError(error.message)
 		}
 	}
 }

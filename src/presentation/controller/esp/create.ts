@@ -11,7 +11,7 @@ export class CreateESPController implements IController {
   async handle(request: IRequest): Promise<IResponse> {
     try {
       const error = await this.validationBody.validate(request.body)
-  
+
       if (error) return error
 
       return ({
@@ -20,7 +20,7 @@ export class CreateESPController implements IController {
       })
     }
     catch (error) {
-      return new InternalServerError(error)
+      return new InternalServerError(error.message)
     }
 
 

@@ -13,7 +13,7 @@ export class DeleteESPController implements IController {
       const error = this.validationParams.validate(request.params)
 
       if (error) return error
-      
+
       await this.deleteESP.delete(request.params)
 
       return ({
@@ -22,7 +22,7 @@ export class DeleteESPController implements IController {
       })
     }
     catch(error) {
-      return new InternalServerError(error)
+      return new InternalServerError(error.message)
     }
   }
 }

@@ -23,7 +23,7 @@ export class DeleteACSController implements IController {
 			})
 		}
 		catch(error) {
-			return new InternalServerError(error)
+			return new InternalServerError(error.message)
 		}
 	}
 }

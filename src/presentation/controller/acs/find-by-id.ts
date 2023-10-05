@@ -7,20 +7,20 @@ export class FindACSByIdController implements IController {
         private readonly validationParameters: IValidator,
         private readonly findACSByID: IFindACS
     ){}
-    
+
     async handle(request: IRequest): Promise<IResponse> {
         try {
-            const error = this.validationParameters.validate(request.params)   
-    
+            const error = this.validationParameters.validate(request.params)
+
             if (error) throw error
-    
+
             return ({
                 statusCode: 200,
                 body: await this.findACSByID.findById(request.params)
             })
-        } 
+        }
         catch (error) {
-            return new InternalServerError(error);
+            return new InternalServerError(error.message);
         }
     }
 }
