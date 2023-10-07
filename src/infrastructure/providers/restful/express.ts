@@ -1,31 +1,60 @@
 //@deno-types="npm:@types/express@4"
 import express from "$express"
-import { IRestFul } from "@app/ports/providers/restful.ts"
+import { ILogger, IRestFul } from "@app/ports/providers/restful.ts"
+import { IRequest, IResponse } from "@app/ports/presentation/mod.ts";
+function adaptCallback(callback: (req: IRequest) => IResponse) {
+	return (req: express.Request, res: express.Response) => {
+		try {
+			const response = callback(req)
+			adaptResponse(response, res)
+		} catch(error) {
+			res.status(500).json({ message: "error internal in adaptCallback" })
+		}
+	}
+}
+
+function adaptMiddleware(callback: (req: IRequest, next: () => void) => IResponse) {
+	return (req: express.Request, res: express.Response, next: express.NextFunction) => {
+		try {
+			const response = callback(req, next)
+			adaptResponse(response, res)
+		} catch(error) {
+			res.status(500).json({ message: "error internal in adaptMiddleware" })
+		}
+	}
+}
+
+function adaptResponse(res: IResponse, resAdapt: express.Response): void {
+	if(typeof res.body == "string")
+		resAdapt.status(res.statusCode).send(res.body)
+	else
+		resAdapt.status(res.statusCode).json(res.body)
+}
 
 export class Router {
 	public readonly router = express.Router()
 
-	public use(path: string, callback: (req: express.Request, res: express.Response, next: express.NextFunction) => void | Router): void {
+	public use(path: string, callback: ((req: IRequest) => IResponse) | Router): void {
 		if(callback instanceof Router)
 			this.router.use(path, callback.router)
 		else
-			this.router.use(path, callback)
+			this.router.use(path, adaptMiddleware(callback))
 	}
 
-	public get(path: string, callback: (req: express.Request, res: express.Response) => void): void {
-		this.router.get(path, callback)
+	public get(path: string, callback: (req: IRequest) => IResponse): void {
+		this.router.get(path, adaptCallback(callback))
 	}
 
-	public post(path: string, callback: (req: express.Request, res: express.Response) => void): void {
-		this.router.post(path, callback)
+	public post(path: string, callback: (req: IRequest) => IResponse): void {
+		this.router.post(path, adaptCallback(callback))
 	}
 
-	public put(path: string, callback: (req: express.Request, res: express.Response) => void): void {
-		this.router.put(path, callback)
+	public put(path: string, callback: (req: IRequest) => IResponse): void {
+		this.router.put(path, adaptCallback(callback))
 	}
 
-	public delete(path: string, callback: (req: express.Request, res: express.Response) => void): void {
-		this.router.delete(path, callback)
+	public delete(path: string, callback: (req: IRequest) => IResponse): void {
+		this.router.delete(path, adaptCallback(callback))
 	}
 }
 
@@ -36,9 +65,18 @@ export default class RestFul implements IRestFul {
 	private isListening = false
 	private readonly app: express.Application = express()
 
-	private constructor() {
+	public constructor(
+		private readonly router?: Router,
+		private readonly logger?: ILogger,
+		private readonly debug: boolean = false
+	) {
 		if(RestFul.instance) return RestFul.instance
 		RestFul.instance = this
+
+		if(this.router)
+			this.app.use(router!.router)
+
+		this.app.use(express.json())
 	}
 
 	public listen(callback?: (host: string, port: number) => void): void {
@@ -47,29 +85,33 @@ export default class RestFul implements IRestFul {
 
 		this.isListening = true
 
+		if(!callback)
+			callback = (host, port) => console.log(`Server restful listening on http://${host}:${port}`)
+
 		this.app.listen(this.port, () => callback!(this.host, this.port))
 	}
 
-	public use(path?: string, callback?: (req: express.Request, res: express.Response, next: express.NextFunction) => void | Router): void {
-		if(callback instanceof Router)
-			this.app.use(path!, callback.router)
-		else
-			this.app.use(path!, callback!)
+	public use(path: string, callback: ((req: IRequest, next: () => void) => IResponse) | Router): void {
+		if(callback! instanceof Router) {
+			this.app.use(path, callback.router)
+			console.log("Router")
+		} else
+			this.app.use(path, adaptMiddleware(callback))
 	}
 
-	public get(path: string, callback: (req: express.Request, res: express.Response) => void): void {
-		this.app.get(path, callback)
+	public get(path: string, callback: (req: IRequest) => IResponse): void {
+		this.app.get(path, adaptCallback(callback))
 	}
 
-	public post(path: string, callback: (req: express.Request, res: express.Response) => void): void {
-		this.app.post(path, callback)
+	public post(path: string, callback: (req: IRequest) => IResponse): void {
+		this.app.post(path, adaptCallback(callback))
 	}
 
-	public put(path: string, callback: (req: express.Request, res: express.Response) => void): void {
-		this.app.put(path, callback)
+	public put(path: string, callback: (req: IRequest) => IResponse): void {
+		this.app.put(path, adaptCallback(callback))
 	}
 
-	public delete(path: string, callback: (req: express.Request, res: express.Response) => void): void {
-		this.app.delete(path, callback)
+	public delete(path: string, callback: (req: IRequest) => IResponse): void {
+		this.app.delete(path, adaptCallback(callback))
 	}
 }
