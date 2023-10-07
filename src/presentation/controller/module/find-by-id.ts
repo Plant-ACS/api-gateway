@@ -2,7 +2,7 @@ import { IFindModule } from '@use-cases';
 import { InternalServerError } from '@app/errors/mod.ts';
 import { IController, IRequest, IResponse, IValidator } from '@app/ports/presentation/mod.ts'
 
-export class FindModuleById implements IController {
+export class FindModuleByIdController implements IController {
 	constructor(
 		private readonly validationParameter: IValidator,
 		private readonly findModuleById: IFindModule

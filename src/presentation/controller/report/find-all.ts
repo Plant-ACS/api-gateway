@@ -2,7 +2,7 @@ import { IFindReport } from "@use-cases";
 import { InternalServerError } from "@app/errors/mod.ts";
 import { IController, IResponse } from "@app/ports/presentation/mod.ts";
 
-export class FindAllReports implements IController {
+export class FindAllReportsController implements IController {
 	constructor (
 		private readonly findAll: IFindReport
 	){}

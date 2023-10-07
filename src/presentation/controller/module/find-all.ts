@@ -2,7 +2,7 @@ import { IFindModule } from "@use-cases";
 import { InternalServerError } from "@app/errors/mod.ts";
 import { IController, IResponse } from "@app/ports/presentation/mod.ts";
 
-export class FindAllModules implements IController {
+export class FindAllModulesController implements IController {
 	constructor (
 		private readonly findAll: IFindModule
 	){}
