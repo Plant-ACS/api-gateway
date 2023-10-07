@@ -1,6 +1,6 @@
 export interface IRecoverPasswordDTO {
     readonly code: string,
-    readonly newUsername: string
+    readonly newPassword: string
 }
 
 export interface IRecoverPassword {
