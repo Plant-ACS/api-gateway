@@ -1,28 +1,16 @@
+import mongoose from 'mongoose'
+let connection: typeof mongoose|null = null
 
-// const uri = 'mongodb://localhost:27017';
-// const dbName = 'your_database_name';
+async function startConnection() {
+	connection = await mongoose.connect("mongodb+srv://root-solis:E17FCsvnyh7oH4jM@solis.imfvv3c.mongodb.net/?retryWrites=true&w=majority")
+}
 
-// export async function connectToMongoDB() {
-//   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+async function getConnectionDB() {
+	if (connection == null)
+		await startConnection()
+	if(connection != null)
+		return connection
+	throw new Error('Connection not started')
+}
 
-//   try {
-//     await client.connect();
-//     console.log('Connected to MongoDB');
-//     return client;
-//   } catch (error) {
-//     console.error('Error connecting to MongoDB:', error);
-//     throw error;
-//   }
-// }
-
-// export async function closeMongoDBConnection(client: MongoClient) {
-//   try {
-//     await client.close();
-//     console.log('Disconnected from MongoDB');
-//   } catch (error) {
-//     console.error('Error closing MongoDB connection:', error);
-//     throw error;
-//   }
-// }
-
-// // You can export other MongoDB-related functions or constants as needed
+export default getConnectionDB

@@ -7,7 +7,7 @@
   "imports": {
     "$express": "npm:express@4.18.2",
 		"$socket": "npm:socket.io@4.7.1",
-
+    "mongoose": "npm:mongoose",
     "@app/": "./src/app/",
     "@core/": "./src/core/",
     "@entities": "./src/core/entities/mod.ts",
