@@ -1,5 +1,4 @@
 import getConnectionDB from "../config/connection.ts"
-
 const { Schema, model } = await getConnectionDB()
 
 const ACSSchema = new Schema ({

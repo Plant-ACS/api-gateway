@@ -1,5 +1,4 @@
 import getConnectionDB from "../config/connection.ts"
-
 const { Schema, model } = await getConnectionDB()
 
 const ESPSchema = new Schema({
@@ -9,8 +8,8 @@ const ESPSchema = new Schema({
 	},
 	ports: {
 		type: Array<{
-			key: Number | Number[],
-			module: String
+			key: number | number[],
+			module: string
 		}>,
 		required: true
 	}
