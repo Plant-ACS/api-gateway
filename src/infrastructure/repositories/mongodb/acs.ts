@@ -1,7 +1,7 @@
 import { IACS } from "@entities"
 import { IFindSearchACSDTO, TUpdateACSDTO } from "@use-cases";
 import { type IACSRepository } from "@app/ports/repositories/mod.ts";
-import getConnectionDB from "@infra/providers/mongodb-connection.ts"
+import getConnectionDB from "@infra/repositories/mongodb/config/connection.ts"
 import { InternalServerError } from "@app/errors/internal-server-error.ts";
 
 export class ACSRepository implements IACSRepository {
