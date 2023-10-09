@@ -48,7 +48,7 @@ export class ACSRepository implements IACSRepository {
 		return await ACSDB.findOne({ _id: data })
 			.then((data) => data as unknown as IACS)
 			.catch((_error) => {
-				throw new InternalServerError("Error in finding in the database")
+				throw new InternalServerError("Error in finding ACS in the database")
 			})
 	}
 
