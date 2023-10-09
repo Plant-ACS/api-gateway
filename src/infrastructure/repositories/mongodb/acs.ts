@@ -7,7 +7,18 @@ import { InternalServerError } from "@app/errors/internal-server-error.ts"
 export class ACSRepository implements IACSRepository {
 	async alreadyExists(data: Omit<IACS,"id">): Promise<boolean> {
 		try {
-			if (await this.findSearch(data)) return true
+			if (
+				(await this.findSearch({
+					name: data.name,
+					espId: data.espId,
+					createdAt: data.createdAt,
+					filter: {
+						order: "ASC",
+						limit: 1,
+						page: 1
+					}
+				})).length > 0
+			) return true
 
 			return false
 		}
@@ -16,19 +27,8 @@ export class ACSRepository implements IACSRepository {
 		}
 	}
 	async save(data: Omit<IACS, "id">): Promise<IACS> {
-		if (
-			(await this.findSearch({
-				name: data.name,
-				espId: data.espId,
-				createdAt: data.createdAt,
-				filter: {
-					order: "ASC",
-					limit: 1,
-					page: 1
-				}
-			})).length > 0
-		)
-		throw new Error("ACS already exists")
+		if (await this.alreadyExists)
+			throw new Error("ACS already exists")
 
 		return await ACSDB.insertOne(data)
 			.then((data) => data as unknown as IACS)
@@ -53,7 +53,6 @@ export class ACSRepository implements IACSRepository {
 	}
 
 	async findSearch(data: IFindSearchACSDTO): Promise<IACS[]> {
-
 		return await ACSDB.findMany({
 			name: data.name,
 			espId: data.name,
