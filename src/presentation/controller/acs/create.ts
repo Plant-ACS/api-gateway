@@ -12,15 +12,15 @@ export class CreateACSController implements IController {
 		try {
 			const error = this.validationBody.validate(request.body)
 
-			if (error) throw error
+			if (error) return error.send()
 
 			return ({
 				statusCode: 200,
 				body: await this.createACSController.create(request.body)
 			});
 		}
-		catch(error) {
-			return new InternalServerError(error.message)
+		catch(_err) {
+			return new InternalServerError("Error in Create ACS Controller")
 		}
 	}
 }

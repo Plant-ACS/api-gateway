@@ -42,6 +42,10 @@ export class ACSRepository implements IACSRepository {
 
 	async findById(data: IACS["id"]): Promise<IACS> {
 		return await ACSDB.findOne({ _id: data })
+			.then((data) => data as unknown as IACS)
+			.catch((_error) => {
+				throw new InternalServerError("Error in finding in the database")
+			})
 	}
 
 	async findSearch(data: IFindSearchACSDTO): Promise<IACS[]> {
@@ -67,13 +71,15 @@ export class ACSRepository implements IACSRepository {
 		if (!await this.findById(data.id)) throw new Error("ACS not found")
 		if (!data.name && !data.espId) throw new Error("Invalid information")
 
-		// * What if (e.d) the name is not passed, therefore its null, this would set the ACS's name to null!?!
-		return await ACSDB.updateOne({
+		return await ACSDB.findByIdAndUpdate({
 			_id: data.id,
 			$set: {
 				name: data.name,
 				espId: data.espId
 			}
+		}).then((data) => data as unknown as IACS)
+		.catch((_error) => {
+			throw new InternalServerError("Error in updating the database")
 		})
 	}
 }
