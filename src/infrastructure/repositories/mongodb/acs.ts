@@ -11,8 +11,8 @@ export class ACSRepository implements IACSRepository {
 
 			return false
 		}
-		catch (error) {
-			throw new InternalServerError(error.message)
+		catch (_error) {
+			throw new InternalServerError("Error in verifying database")
 		}
 	}
 	async save(data: Omit<IACS, "id">): Promise<IACS> {
@@ -31,6 +31,10 @@ export class ACSRepository implements IACSRepository {
 		throw new Error("ACS already exists")
 
 		return await ACSDB.insertOne(data)
+			.then((data) => data as unknown as IACS)
+			.catch((_error) => {
+				throw new InternalServerError("Error in creating ACS")
+			})
 	}
 
 	async delete(data: IACS["id"]): Promise<void> {
