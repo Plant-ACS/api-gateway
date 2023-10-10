@@ -4,6 +4,12 @@ import { type IDeleteACSRepository } from "./delete.ts"
 import { type IFindACSRepository } from "./find.ts"
 import { type IUpdateACSRepository } from "./update.ts"
 
+export * from "./already-exists.ts"
+export * from "./save.ts"
+export * from "./delete.ts"
+export * from "./find.ts"
+export * from "./update.ts"
+
 type IACSRepository =
 	IACSAlreadyExists &
 	ISaveACSRepository &

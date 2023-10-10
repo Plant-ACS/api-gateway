@@ -1,7 +1,7 @@
-import { IESP } from "@core/entities/esp.ts"
-import { IESPRepository } from "@app/ports/repositories/mod.ts"
+import { IESP } from "@entities"
+import { type IESPRepository } from "@app/ports/repositories/mod.ts"
 import { TFindESPSearchDTO, TUpdateESPDTO } from "@app/ports/repositories/esp/mod.ts"
-import { InternalServerError } from "@app/errors/internal-server-error.ts"
+import { InternalServerError } from "@app/errors/mod.ts"
 import ESPDB from "@infra/rep/mongodb/models/esp.ts"
 
 export class ESPRepository implements IESPRepository {

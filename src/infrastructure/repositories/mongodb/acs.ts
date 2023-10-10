@@ -1,8 +1,8 @@
 import { IACS } from "@entities"
-import ACSDB from "@infra/rep/mongodb/models/acs.ts"
-import { IFindSearchACSDTO, TUpdateACSDTO } from "@use-cases"
 import { type IACSRepository } from "@app/ports/repositories/mod.ts"
-import { InternalServerError } from "@app/errors/internal-server-error.ts"
+import { TFindACSSearchDTO, TUpdateACSDTO } from "@app/ports/repositories/acs/mod.ts"
+import { InternalServerError } from "@app/errors/mod.ts"
+import ACSDB from "@infra/rep/mongodb/models/acs.ts"
 
 export class ACSRepository implements IACSRepository {
 	async alreadyExists(data: Omit<IACS,"id">): Promise<boolean> {
@@ -52,7 +52,7 @@ export class ACSRepository implements IACSRepository {
 			})
 	}
 
-	async findSearch(data: IFindSearchACSDTO): Promise<IACS[]> {
+	async findSearch(data: TFindACSSearchDTO): Promise<IACS[]> {
 		return await ACSDB.findMany({
 			name: data.name,
 			espId: data.name,
