@@ -1,4 +1,4 @@
 import { IReport } from "@entities"
 export interface ISaveReportRepository {
-	save: (data: IReport["id"]) => Promise<IReport>
+	save: (data: Omit<IReport, "id">) => Promise<IReport>
 }
