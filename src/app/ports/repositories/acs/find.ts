@@ -1,6 +1,6 @@
 import { IACS } from "@entities"
 
-export type TFindSearchACSDTO = {
+export type TFindACSSearchDTO = {
 	readonly filter: {
 		readonly order: "ASC" | "DESC",
 		readonly limit: number,
@@ -10,6 +10,6 @@ export type TFindSearchACSDTO = {
 
 export interface IFindACSRepository {
 	findById: (data: IACS["id"]) => Promise<IACS>
-	findSearch: (data: TFindSearchACSDTO) => Promise<IACS[]>
+	findSearch: (data: TFindACSSearchDTO) => Promise<IACS[]>
 	findAll: () => Promise<IACS[]>
 }
