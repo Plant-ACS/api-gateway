@@ -1,10 +1,10 @@
 import { IUser } from '@entities'
 
-export type TAlterEmailRepositoryDTO = {
+export type TAlterEmailDTO = {
     readonly id: IUser["id"],
     readonly newEmail: IUser["email"]
 }
 
 export interface IAlterEmailRepository {
-    alterEmail: (data: TAlterEmailRepositoryDTO) => Promise<void>
+    alterEmail: (data: TAlterEmailDTO) => Promise<void>
 }

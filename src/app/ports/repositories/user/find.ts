@@ -1,6 +1,6 @@
 import { IUser } from "@entities"
 
-export type IFindUserSearchDTO = {
+export type TFindUserSearchDTO = {
 	readonly filter: {
 		order: "ASC" | "DESC",
 		limit: number,
@@ -10,6 +10,6 @@ export type IFindUserSearchDTO = {
 
 export interface IFindUserRepository {
 	findById: (data: IUser["id"]) => Promise<IUser>
-	findSearch: (data: IFindUserSearchDTO) => Promise<IUser[]>
+	findSearch: (data: TFindUserSearchDTO) => Promise<IUser[]>
 	findAll: () => Promise<IUser[]>
 }

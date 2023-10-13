@@ -1,7 +1,8 @@
 import { IUser } from "@entities"
 
-export type TEmailAlreadyExists = IUser["email"]
-
+export type TEmailAlreadyExistsDTO =  {
+	readonly email: IUser["email"]
+}
 export interface IEmailAlreadyExistsRepository {
-	emailAlreadyExists: (data: TEmailAlreadyExists) => Promise<boolean>
+	emailAlreadyExists: (data: TEmailAlreadyExistsDTO) => Promise<boolean>
 }
