@@ -1,8 +1,7 @@
 import { IReport } from "@entities"
-import { type IReportRepository } from "@app/ports/repositories/mod.ts";
-import { TFindReportSearchDTO, TUpdateReportDTO } from "@app/ports/repositories/mod.ts";
-import { InternalServerError } from "@app/errors/mod.ts";
-import ReportDB from "./models/report.ts";
+import { type IReportRepository, TFindReportSearchDTO, TUpdateReportDTO } from "@app/ports/repositories/mod.ts"
+import { InternalServerError } from "@app/errors/mod.ts"
+import ReportDB from "./models/report.ts"
 
 export class ReportRepository implements IReportRepository {
 	async alreadyExists (data: Omit<IReport,"id">): Promise<boolean> {
