@@ -2,7 +2,7 @@ import { IFindESP } from "@use-cases";
 import { InternalServerError } from "@app/errors/mod.ts";
 import { IController, IResponse } from "@app/ports/presentation/mod.ts";
 
-export class FindAllESP implements IController {
+export class FindAllESPController implements IController {
 	constructor(
 		private readonly findAllESP: IFindESP
 	){}

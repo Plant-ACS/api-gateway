@@ -2,7 +2,7 @@ import { IFindESP } from "@use-cases";
 import { InternalServerError } from "@app/errors/mod.ts";
 import { IController, IRequest, IResponse, IValidator } from "@app/ports/presentation/mod.ts"
 
-export class FindESPById implements IController {
+export class FindESPByIdController implements IController {
 	constructor (
 		private readonly validationParameter: IValidator,
 		private readonly findESP: IFindESP
