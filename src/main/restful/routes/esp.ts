@@ -29,4 +29,5 @@ routerEsp.delete("/:id",
 	adaptController(DeleteESPControllerFactory())
 )
 
+routerEsp.update("")
 export default routerEsp
