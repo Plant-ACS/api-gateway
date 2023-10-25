@@ -7,8 +7,8 @@ export interface ILogger {
 	warn: (message: string) => void,
 }
 
-export type IRequestCallback = (req: IRequest) => IResponse
-export type IMiddlewareCallback = (req: IRequest, next: () => void) => IResponse
+export type IRequestCallback = (req: IRequest) => Promise<IResponse>
+export type IMiddlewareCallback = (req: IRequest, next: () => void) => Promise<IResponse>
 
 export interface IRouter {
 	use(path: string, callback: (IMiddlewareCallback | IRouter)): void,

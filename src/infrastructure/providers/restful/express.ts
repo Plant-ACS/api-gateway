@@ -2,10 +2,10 @@
 import express from "$express"
 import { ILogger, IRestFul } from "@app/ports/providers/restful.ts"
 import { IRequest, IResponse } from "@app/ports/presentation/mod.ts";
-function adaptCallback(callback: (req: IRequest) => IResponse) {
-	return (req: express.Request, res: express.Response) => {
+function adaptCallback(callback: (req: IRequest) => Promise<IResponse>) {
+	return async (req: express.Request, res: express.Response) => {
 		try {
-			const response = callback(req)
+			const response = await callback(req)
 			adaptResponse(response, res)
 		} catch(error) {
 			res.status(500).json({ message: "error internal in adaptCallback" })
@@ -13,10 +13,10 @@ function adaptCallback(callback: (req: IRequest) => IResponse) {
 	}
 }
 
-function adaptMiddleware(callback: (req: IRequest, next: () => void) => IResponse) {
-	return (req: express.Request, res: express.Response, next: express.NextFunction) => {
+function adaptMiddleware(callback: (req: IRequest, next: () => void) => Promise<IResponse>) {
+	return async (req: express.Request, res: express.Response, next: express.NextFunction) => {
 		try {
-			const response = callback(req, next)
+			const response = await callback(req, next)
 			adaptResponse(response, res)
 		} catch(error) {
 			res.status(500).json({ message: "error internal in adaptMiddleware" })
@@ -34,26 +34,26 @@ function adaptResponse(res: IResponse, resAdapt: express.Response): void {
 export class Router {
 	public readonly router = express.Router()
 
-	public use(path: string, callback: ((req: IRequest) => IResponse) | Router): void {
+	public use(path: string, callback: ((req: IRequest) => Promise<IResponse>) | Router): void {
 		if(callback instanceof Router)
 			this.router.use(path, callback.router)
 		else
 			this.router.use(path, adaptMiddleware(callback))
 	}
 
-	public get(path: string, callback: (req: IRequest) => IResponse): void {
+	public get(path: string, callback: (req: IRequest) => Promise<IResponse>): void {
 		this.router.get(path, adaptCallback(callback))
 	}
 
-	public post(path: string, callback: (req: IRequest) => IResponse): void {
+	public post(path: string, callback: (req: IRequest) => Promise<IResponse>): void {
 		this.router.post(path, adaptCallback(callback))
 	}
 
-	public put(path: string, callback: (req: IRequest) => IResponse): void {
+	public put(path: string, callback: (req: IRequest) => Promise<IResponse>): void {
 		this.router.put(path, adaptCallback(callback))
 	}
 
-	public delete(path: string, callback: (req: IRequest) => IResponse): void {
+	public delete(path: string, callback: (req: IRequest) => Promise<IResponse>): void {
 		this.router.delete(path, adaptCallback(callback))
 	}
 }
@@ -91,7 +91,7 @@ export default class RestFul implements IRestFul {
 		this.app.listen(this.port, () => callback!(this.host, this.port))
 	}
 
-	public use(path: string, callback: ((req: IRequest, next: () => void) => IResponse) | Router): void {
+	public use(path: string, callback: ((req: IRequest, next: () => void) => Promise<IResponse>) | Router): void {
 		if(callback! instanceof Router) {
 			this.app.use(path, callback.router)
 			console.log("Router")
@@ -99,19 +99,19 @@ export default class RestFul implements IRestFul {
 			this.app.use(path, adaptMiddleware(callback))
 	}
 
-	public get(path: string, callback: (req: IRequest) => IResponse): void {
+	public get(path: string, callback: (req: IRequest) => Promise<IResponse>): void {
 		this.app.get(path, adaptCallback(callback))
 	}
 
-	public post(path: string, callback: (req: IRequest) => IResponse): void {
+	public post(path: string, callback: (req: IRequest) => Promise<IResponse>): void {
 		this.app.post(path, adaptCallback(callback))
 	}
 
-	public put(path: string, callback: (req: IRequest) => IResponse): void {
+	public put(path: string, callback: (req: IRequest) => Promise<IResponse>): void {
 		this.app.put(path, adaptCallback(callback))
 	}
 
-	public delete(path: string, callback: (req: IRequest) => IResponse): void {
+	public delete(path: string, callback: (req: IRequest) => Promise<IResponse>): void {
 		this.app.delete(path, adaptCallback(callback))
 	}
 }
